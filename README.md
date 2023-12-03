@@ -26,11 +26,12 @@
 ### Retrieve the html report from docker container to local
 `docker run -it --rm --name bdd-cypress-container -v $PWD:/Qa-BDD-Cypress bdd-cypress-image:1.0.0`
 
-
+***
+___
 
 ## Tech Stack:
-JavaScript
-BDD Framework : Cucumber
-Cypress
+> * JavaScript
+> * BDD Framework : Cucumber
+> * Cypress
 
 
