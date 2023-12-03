@@ -1,0 +1,45 @@
+{
+  "name": "qa_bdd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cucumber-report": "node cucumber-html-report.js",
+    "delete-existingJsonReports": "rm -rf cypress/reports/cucumber-json/*.json",
+    "delete-reportFolder": "rm -rf cypress/reports/",
+    "testing-smoke": "npx cypress run -e TAGS='@smoke' --e2e --browser electron --headless --spec 'cypress/e2e/features/**/*.feature'",
+    "testing": "npx cypress run --e2e --browser chrome --headless",
+    "TestWithReportGeneration": "npm run delete-reportFolder ;npm run testing-smoke ; npm run cucumber-report ; npm run delete-existingJsonReports",
+    "TestWithDocker": "npm run delete-reportFolder; npm run testing-smoke ; npm run cucumber-report; npm run delete-existingJsonReports"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MKefem/QA_BDD_Cypress/issues"
+  },
+  "author": "Kadri Efe",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/MKefem/QA_BDD_Cypress/issues"
+  },
+  "homepage": "https://github.com/MKefem/QA_BDD_Cypress/issuesnpm#readme",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^10.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-iframe": "^1.0.1",
+    "playwright-webkit": "^1.25.2"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "commonPath": "cypress/integration/step-definition/",
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/reports/cucumber-json",
+      "filePrefix": "report-",
+      "fileSuffix": ".cucumber"
+    }
+  },
+  "dependencies": {
+    "multiple-cucumber-html-reporter": "^3.0.1"
+  }
+}

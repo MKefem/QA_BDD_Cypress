@@ -1,0 +1,28 @@
+name: API Test Report
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  Cypress-Test:
+    timeout-minutes: 120
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Test in cypress and generate Multile Cucumber Html Report
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run TestWithReportGeneration
+          browser: chrome
+
+      - name: Upload Report on GitHub Actions
+        uses: actions/upload-artifact@v2
+        with:
+          name: HTML_Report
+          path: cypress/reports/Results
+          retention-days: 2
