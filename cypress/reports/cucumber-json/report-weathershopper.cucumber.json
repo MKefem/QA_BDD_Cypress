@@ -31,7 +31,7 @@
             "name": "I am on the Weather Shopper website",
             "result": {
               "status": "passed",
-              "duration": 1324000000
+              "duration": 566000000
             }
           },
           {
@@ -41,7 +41,7 @@
             "name": "I see the weather is below 19 degrees",
             "result": {
               "status": "passed",
-              "duration": 20000000
+              "duration": 15000000
             }
           },
           {
@@ -51,7 +51,7 @@
             "name": "I click on the \"Buy moisturizers\" button",
             "result": {
               "status": "passed",
-              "duration": 940000000
+              "duration": 819000000
             }
           },
           {
@@ -61,7 +61,7 @@
             "name": "I select the least expensive product containing \"aloe\" and add to card",
             "result": {
               "status": "passed",
-              "duration": 98000000
+              "duration": 84000000
             }
           },
           {
@@ -71,7 +71,7 @@
             "name": "I select the least expensive product containing \"almond\" and add to card",
             "result": {
               "status": "passed",
-              "duration": 90000000
+              "duration": 80000000
             }
           },
           {
@@ -81,7 +81,7 @@
             "name": "I click on the \"Cart\" button",
             "result": {
               "status": "passed",
-              "duration": 1698000000
+              "duration": 1320000000
             }
           },
           {
@@ -91,7 +91,7 @@
             "name": "the cart list should contain \"aloe\" and \"almond\" products",
             "result": {
               "status": "passed",
-              "duration": 22000000
+              "duration": 14000000
             }
           },
           {
@@ -101,7 +101,7 @@
             "name": "I click on the \"Pay with Card\" button",
             "result": {
               "status": "passed",
-              "duration": 91000000
+              "duration": 81000000
             }
           },
           {
@@ -111,7 +111,7 @@
             "name": "I fill out valid payment details and submit the form",
             "result": {
               "status": "passed",
-              "duration": 3934000000
+              "duration": 3856000000
             }
           },
           {
@@ -121,7 +121,7 @@
             "name": "I should see a success message on the confirmation page",
             "result": {
               "status": "passed",
-              "duration": 3449000000
+              "duration": 3453000000
             }
           }
         ]
@@ -150,7 +150,7 @@
             "name": "I am on the Weather Shopper website",
             "result": {
               "status": "passed",
-              "duration": 423000000
+              "duration": 421000000
             }
           },
           {
@@ -160,7 +160,7 @@
             "name": "I see the weather is above 34 degrees",
             "result": {
               "status": "passed",
-              "duration": 6000000
+              "duration": 4000000
             }
           },
           {
@@ -170,7 +170,7 @@
             "name": "I click on the \"Buy sunscreens\" button",
             "result": {
               "status": "passed",
-              "duration": 945000000
+              "duration": 792000000
             }
           },
           {
@@ -180,7 +180,7 @@
             "name": "I select the least expensive product containing \"spf-50\" and add to card",
             "result": {
               "status": "passed",
-              "duration": 87000000
+              "duration": 78000000
             }
           },
           {
@@ -190,7 +190,7 @@
             "name": "I select the least expensive product containing \"spf-30\" and add to card",
             "result": {
               "status": "passed",
-              "duration": 80000000
+              "duration": 78000000
             }
           },
           {
@@ -200,7 +200,7 @@
             "name": "I click on the \"Cart\" button",
             "result": {
               "status": "passed",
-              "duration": 782000000
+              "duration": 795000000
             }
           },
           {
@@ -210,7 +210,7 @@
             "name": "the cart list should contain \"spf-50\" and \"spf-30\" products",
             "result": {
               "status": "passed",
-              "duration": 8000000
+              "duration": 5000000
             }
           },
           {
@@ -220,7 +220,7 @@
             "name": "I click on the \"Pay with Card\" button",
             "result": {
               "status": "passed",
-              "duration": 89000000
+              "duration": 92000000
             }
           },
           {
@@ -230,7 +230,7 @@
             "name": "I fill out valid payment details and submit the form",
             "result": {
               "status": "passed",
-              "duration": 3801000000
+              "duration": 3708000000
             }
           },
           {
@@ -240,7 +240,7 @@
             "name": "I should see a success message on the confirmation page",
             "result": {
               "status": "passed",
-              "duration": 3481000000
+              "duration": 3388000000
             }
           }
         ]
@@ -260,7 +260,7 @@
             "name": "I am on the Weather Shopper website",
             "result": {
               "status": "passed",
-              "duration": 481000000
+              "duration": 414000000
             }
           },
           {
@@ -270,7 +270,7 @@
             "name": "the weather is between 19 and 34 degrees",
             "result": {
               "status": "passed",
-              "duration": 6000000
+              "duration": 4000000
             }
           },
           {
@@ -280,7 +280,7 @@
             "name": "I should see the message \"The weather Condition is too good for shopping.\"",
             "result": {
               "status": "passed",
-              "duration": 4000000
+              "duration": 3000000
             }
           }
         ]
