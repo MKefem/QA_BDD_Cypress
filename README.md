@@ -1,6 +1,29 @@
 # QA_BDD_Cypress
 =================
 
+## Test case explanation
+    1. "raw-code-weathershopper.cy.js" - This file contains raw code of the test scenario.
+        - The test case is written in Cypress as a raw
+        TC. steps shorlisted are
+            - Visit the website
+            - Check the temperature
+            - Decide for moisturer or sunscreen and click on the button
+            - Choose the least expensive products for the given type
+            - Add the products to the cart
+            - Verify the cart
+            - Checkout
+            - Verify the order confirmation
+    2. "weathershopper.feature"- This file contains the BDD test case for the BDD code of the test scenario.
+        - The test case is written in Cypress as a BDD
+        TC. steps shorlisted are
+            - Visit the website
+            - Mock the temperature for the desired value
+            - Decide for moisturer or sunscreen according to the given vlaue and click on the button
+            - Choose the least expensive products for the given type
+            - Add the products to the cart
+            - Verify the cart
+            - Checkout
+            - Verify the order confirmation
 
 ### Installation
 `npm install --save-dev`
