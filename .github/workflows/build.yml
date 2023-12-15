@@ -6,42 +6,44 @@ on:
   pull_request:
     branches: ["master"]
   schedule:
-    - cron: "30 05 * * *" 
+    - cron: "30 05 * * *"
+
 env:
   EMAIL_1: ${{ vars.EMAIL_1 }}
   EMAIL_2: ${{ vars.EMAIL_2 }}
-  GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
-  GMAIL_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-
-  strategy:
-    matrix:
-      email: ["EMAIL_1", "EMAIL_2"]
 
 jobs:
   Cypress-Test:
-    timeout-minutes: 120
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run Test in cypress and generate Multile Cucumber Html Report
-        uses: cypress-io/github-action@v6
+      - name: Run Test in Cypress and generate Cucumber HTML Report
+        uses: cypress-io/github-action@v2
         with:
           command: npm run TestWithReportGeneration
           browser: chrome
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v2
         with:
-          name: artifact
+          name: HTML_Report
           path: cypress/reports/Results
-          retention-days: 2
-          # Available Options:
-          #   warn: Output a warning but do not fail the action
-          #   error: Fail the action with an error message
-          #   ignore: Do not output any warnings or errors, the action does not fail
-          #   if-no-files-found: 2
+
+  Send-Email:
+    needs: Cypress-Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        email: ["EMAIL_1", "EMAIL_2"]  # Use environment variables as email addresses
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: HTML_Report
+          path: cypress/reports/Results
+
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
         with:
@@ -51,7 +53,7 @@ jobs:
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
           from: ${{ secrets.GMAIL_USERNAME }}
           subject: "Cucumber HTML Report"
-          to: ${{ vars.EMAIL_1 }}
+          to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
           attachments: cypress/reports/Results/index.html
           content_type: text/plain
