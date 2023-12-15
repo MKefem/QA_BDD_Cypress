@@ -18,18 +18,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: |
+          npm install puppeteer
 
       - name: Run Test in Cypress and generate Cucumber HTML Report
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
           command: npm run TestWithReportGeneration
           browser: chrome
 
-      - name: Upload a Build Artifact
+      - name: Generate PDF Report
+        run: |
+          node -e "const puppeteer = require('puppeteer'); async function run() { const browser = await puppeteer.launch(); const page = await browser.newPage(); await page.goto('http://localhost:8080/_sql?error_trace', { waitUntil: 'networkidle0' }); await page.pdf({ path: 'cypress/reports/Results/report.pdf', format: 'A4' }); await browser.close(); } run();"
+
+      - name: Upload PDF Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: HTML_Report
-          path: cypress/reports/Results
+          name: PDF_Report
+          path: cypress/reports/Results/report.pdf
 
   Send-Email:
     needs: Cypress-Test
@@ -41,15 +54,8 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: HTML_Report
-          path: cypress/reports/Results
-
-      - name: Install wkhtmltopdf
-        run: sudo apt-get install -y wkhtmltopdf
-
-      - name: Convert HTML Report to PDF
-        run: |
-          wkhtmltopdf --disable-javascript --no-images cypress/reports/Results/index.html cypress/reports/Results/report.pdf
+          name: HTML_Report_as_PDF
+          path: cypress/reports/Results/report.pdf
 
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
