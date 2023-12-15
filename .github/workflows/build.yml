@@ -58,8 +58,7 @@ jobs:
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
           attachments: |
-            cypress-artifact/output.html
-            cypress-artifact/weathershopper.feature.mp4
+            cypress-artifact/output.html cypress-artifact/weathershopper.feature.mp4
           content_type: text/plain
         env:
           CI: 1
