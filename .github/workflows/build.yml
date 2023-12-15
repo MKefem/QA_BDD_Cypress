@@ -33,3 +33,16 @@ jobs:
           #   error: Fail the action with an error message
           #   ignore: Do not output any warnings or errors, the action does not fail
           #   if-no-files-found: 2
+          
+      - name: Send email with artifact
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_PASSWORD }}
+          subject: "Cucumber HTML Report"
+          to: efe.mkadri@gmail.com
+          body: "Please find the attached Cucumber HTML Report."
+          attachments: |
+            cypress/reports/Results/index.html
