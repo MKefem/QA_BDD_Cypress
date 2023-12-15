@@ -33,17 +33,6 @@ jobs:
           #   error: Fail the action with an error message
           #   ignore: Do not output any warnings or errors, the action does not fail
           #   if-no-files-found: 2
-          
-  Send-Email:
-    needs: Cypress-Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: HTML_Report
-          path: cypress/reports/Results
-
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
         with:
