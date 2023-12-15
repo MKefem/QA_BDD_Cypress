@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Test in Cypress and generate Cucumber HTML Report
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6
         with:
           command: npm run run-smoke-get-mocha-report
           browser: chrome
@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Report
-          path: /output.html
+          path: .
 
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
@@ -55,7 +55,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: /output.html
+          attachments: output.html
           content_type: text/plain
         env:
           CI: 1
