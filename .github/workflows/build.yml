@@ -49,7 +49,7 @@ jobs:
       - name: Send email with artifact
         run: |
           attachment_paths="cypress-artifact/output.html cypress-artifact/weathershopper.feature.mp4"
-          dawidd6/action-send-mail@v2 \
+          ./node_modules/.bin/dawidd6/action-send-mail@v2 \
             --server_address smtp.gmail.com \
             --server_port 587 \
             --username ${{ secrets.GMAIL_USERNAME }} \
