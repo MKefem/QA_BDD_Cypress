@@ -44,7 +44,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Report
-          path: .
+          path: cypress-artifact
 
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
@@ -58,8 +58,8 @@ jobs:
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
           attachments: |
-            output.html
-            weathershopper.feature.mp4
+            cypress-artifact/output.html
+            cypress-artifact/weathershopper.feature.mp4
           content_type: text/plain
         env:
           CI: 1
