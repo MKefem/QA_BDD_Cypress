@@ -42,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Report
-          path: output.html
+          path: /output.html
 
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
@@ -55,7 +55,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: output.html
+          attachments: /output.html
           content_type: text/plain
         env:
           CI: 1
