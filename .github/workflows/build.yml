@@ -29,7 +29,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Report
-          path: output.html
+          path: |
+            output.html
+            cypress/videos/*.mp4
 
   Send-Email:
     needs: Cypress-Test
@@ -55,7 +57,9 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: output.html
+          attachments: |
+            output.html
+            *.mp4
           content_type: text/plain
         env:
           CI: 1
