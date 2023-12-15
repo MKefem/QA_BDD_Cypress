@@ -28,7 +28,7 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: HTML_Report
+          name: Report
           path: cypress/reports/Results/report.html
 
   Send-Email:
@@ -41,7 +41,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
-          name: HTML_Report_as_PDF
+          name: Report
           path: cypress/reports/Results/report.html
 
       - name: Send email with artifact
