@@ -44,6 +44,9 @@ jobs:
           name: HTML_Report
           path: cypress/reports/Results
 
+      - name: Zip HTML Report
+        run: zip -r cypress/reports/Results.zip cypress/reports/Results/
+
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
         with:
@@ -55,7 +58,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: cypress/reports/Results/
+          attachments: cypress/reports/Results.zip 
           content_type: text/plain
         env:
           CI: 1
