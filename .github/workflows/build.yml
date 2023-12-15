@@ -55,7 +55,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: cypress/reports/Results/**
+          attachments: cypress/reports/Results/
           content_type: text/plain
         env:
           CI: 1
