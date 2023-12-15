@@ -1,0 +1,17 @@
+name: E2E on Chrome
+on: 
+  schedule:
+    - cron: "30 05 * * *" 
+jobs:
+  cypress-run:
+    runs-on: ubuntu-20.04
+    # let's make sure our tests pass on Chrome browser
+    name: E2E on Chrome
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
+          record: true
