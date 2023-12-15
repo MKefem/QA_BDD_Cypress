@@ -40,13 +40,13 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 587
           username: ${{ secrets.GMAIL_USERNAME }}
-          password: ${{ secrets.GMAIL_PASSWORD }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
           subject: "Cucumber HTML Report"
           to: efe.mkadriefe@gmail.com
           from: efe.mkadriefe@gmail.com
           body: "Please find the attached Cucumber HTML Report."
           attachments: cypress/reports/Results/index.html
-          content_type: text/plain         
+          content_type: text/plain
         env:
           CI: 1
           CYPRESS_CACHE_FOLDER: /home/runner/.cache/Cypress
