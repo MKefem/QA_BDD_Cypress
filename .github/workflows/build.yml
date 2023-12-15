@@ -42,7 +42,13 @@ jobs:
           username: ${{ secrets.GMAIL_USERNAME }}
           password: ${{ secrets.GMAIL_PASSWORD }}
           subject: "Cucumber HTML Report"
-          to: efe.mkadri@gmail.com
+          to: efe.mkadriefe@gmail.com
+          from: efe.mkadriefe@gmail.com
           body: "Please find the attached Cucumber HTML Report."
-          attachments: |
-            cypress/reports/Results/index.html
+          attachments: cypress/reports/Results/index.html
+          content_type: text/plain         
+        env:
+          CI: 1
+          CYPRESS_CACHE_FOLDER: /home/runner/.cache/Cypress
+          npm_config_cache: /home/runner/.npm
+          TERM: xterm
