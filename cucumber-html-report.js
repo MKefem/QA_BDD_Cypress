@@ -4,8 +4,8 @@ const Report_Time = (date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.g
 
 report.generate({
   jsonDir: 'cypress/reports/cucumber-json', // ** Path of .json file **//
-  reportPath: 'cypress/reports/Results/report.html', // ** Path of .html file **//
-  displayDuration: true,
+  reportPath: 'cypress/reports/Results/report-${reportTime}', // ** Path of .html file **//
+  generateReportFile: true,
   metadata: {
 
     browser: {
