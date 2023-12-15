@@ -34,6 +34,16 @@ jobs:
           #   ignore: Do not output any warnings or errors, the action does not fail
           #   if-no-files-found: 2
           
+  Send-Email:
+    needs: Cypress-Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: HTML_Report
+          path: cypress/reports/Results
+
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
         with:
@@ -41,9 +51,9 @@ jobs:
           server_port: 587
           username: ${{ secrets.GMAIL_USERNAME }}
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          from: ${{ secrets.GMAIL_USERNAME }}
           subject: "Cucumber HTML Report"
-          to: efe.mkadriefe@gmail.com
-          from: efe.mkadriefe@gmail.com
+          to: ${{ vars.EMAILS }}
           body: "Please find the attached Cucumber HTML Report."
           attachments: cypress/reports/Results/index.html
           content_type: text/plain
