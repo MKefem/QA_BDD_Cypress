@@ -49,7 +49,7 @@ jobs:
 
       - name: Convert HTML Report to PDF
         run: |
-          wkhtmltopdf --disable-javascript cypress/reports/Results/index.html cypress/reports/Results/report.pdf
+          wkhtmltopdf --disable-javascript --no-images cypress/reports/Results/index.html cypress/reports/Results/report.pdf
 
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
