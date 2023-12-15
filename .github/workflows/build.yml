@@ -31,7 +31,7 @@ jobs:
           name: Report
           path: |
             output.html
-            cypress/videos/*.mp4
+            cypress/videos/weathershopper.feature.mp4
 
   Send-Email:
     needs: Cypress-Test
@@ -59,7 +59,7 @@ jobs:
           body: "Please find the attached Cucumber HTML Report."
           attachments: |
             output.html
-            *.mp4
+            weathershopper.feature.mp4
           content_type: text/plain
         env:
           CI: 1
