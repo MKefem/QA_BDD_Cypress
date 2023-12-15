@@ -8,7 +8,7 @@ module.exports = defineConfig({
     baseUrl: "https://weathershopper.pythonanywhere.com/",
     setupNodeEvents(on, config) {
       const cucumber = require('cypress-cucumber-preprocessor').default
-      on('file:preprocessor', cucumber())
+      on('file:preprocessor', cucumber());
     },
 
 
@@ -21,7 +21,17 @@ module.exports = defineConfig({
     pageLoadTimeout: 8000,
     watchForFileChanges: false,
     chromeWebSecurity: false,
-
+    reporter: 'cypress-mochawesome-reporter',
+    reporterOptions: {
+      charts: true,
+      overwrite: true,
+      html: false,
+      json: true,
+      reportPageTitle: 'Cypress Test Runner',
+      embeddedScreenshots: true,
+      inlineAssets: true, //Adds the asserts inline
+      reportDir: 'cypress/report/mochawesome-report',
+    },
 
     "retries": {
 
