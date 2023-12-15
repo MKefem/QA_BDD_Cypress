@@ -30,6 +30,7 @@ report.generate({
       { label: 'Org Name', value: '' },
       { label: 'Execution Date', value: Report_Time },
     ]
-  }
-
+  },
+  storeScreenShots: true,
+  merge: true,
 });
