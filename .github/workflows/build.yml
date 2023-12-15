@@ -7,6 +7,15 @@ on:
     branches: ["master"]
   schedule:
     - cron: "30 05 * * *" 
+env:
+  EMAIL_1: ${{ vars.EMAIL_1 }}
+  EMAIL_2: ${{ vars.EMAIL_2 }}
+  GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+  GMAIL_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+
+  strategy:
+    matrix:
+      email: ["EMAIL_1", "EMAIL_2"]
 
 jobs:
   Cypress-Test:
@@ -42,7 +51,7 @@ jobs:
           password: ${{ secrets.GMAIL_APP_PASSWORD }}
           from: ${{ secrets.GMAIL_USERNAME }}
           subject: "Cucumber HTML Report"
-          to: ${{ vars.EMAILS }}
+          to: ${{ vars.EMAIL_1 }}
           body: "Please find the attached Cucumber HTML Report."
           attachments: cypress/reports/Results/index.html
           content_type: text/plain
