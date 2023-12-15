@@ -18,31 +18,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '16'
-
-      - name: Install Dependencies
-        run: |
-          npm install puppeteer
 
       - name: Run Test in Cypress and generate Cucumber HTML Report
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v2
         with:
           command: npm run TestWithReportGeneration
           browser: chrome
 
-      - name: Generate PDF Report
-        run: |
-          node -e "const puppeteer = require('puppeteer'); async function run() { const browser = await puppeteer.launch(); const page = await browser.newPage(); await page.goto('http://localhost:8080/_sql?error_trace', { waitUntil: 'networkidle0' }); await page.pdf({ path: 'cypress/reports/Results/report.pdf', format: 'A4' }); await browser.close(); } run();"
-
-      - name: Upload PDF Artifact
+      - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: PDF_Report
-          path: cypress/reports/Results/report.pdf
+          name: HTML_Report
+          path: cypress/reports/Results/report.html
 
   Send-Email:
     needs: Cypress-Test
@@ -55,7 +42,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: HTML_Report_as_PDF
-          path: cypress/reports/Results/report.pdf
+          path: cypress/reports/Results/report.html
 
       - name: Send email with artifact
         uses: dawidd6/action-send-mail@v2
@@ -68,7 +55,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: cypress/reports/Results/report.pdf 
+          attachments: cypress/reports/Results/report.html
           content_type: text/plain
         env:
           CI: 1
