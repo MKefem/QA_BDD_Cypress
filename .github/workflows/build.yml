@@ -47,19 +47,19 @@ jobs:
           path: cypress-artifact
 
       - name: Send email with artifact
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.GMAIL_USERNAME }}
-          password: ${{ secrets.GMAIL_APP_PASSWORD }}
-          from: ${{ secrets.GMAIL_USERNAME }}
-          subject: "Cucumber HTML Report"
-          to: ${{ env[matrix.email] }}
-          body: "Please find the attached Cucumber HTML Report."
-          attachments: |
-            cypress-artifact/output.html cypress-artifact/weathershopper.feature.mp4
-          content_type: text/plain
+        run: |
+          attachment_paths="cypress-artifact/output.html cypress-artifact/weathershopper.feature.mp4"
+          dawidd6/action-send-mail@v2 \
+            --server_address smtp.gmail.com \
+            --server_port 587 \
+            --username ${{ secrets.GMAIL_USERNAME }} \
+            --password ${{ secrets.GMAIL_APP_PASSWORD }} \
+            --from ${{ secrets.GMAIL_USERNAME }} \
+            --subject "Cucumber HTML Report" \
+            --to: ${{ env[matrix.email] }}
+            --body "Please find the attached Cucumber HTML Report." \
+            --attachments $attachment_paths \
+            --content_type text/plain
         env:
           CI: 1
           CYPRESS_CACHE_FOLDER: /home/runner/.cache/Cypress
