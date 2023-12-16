@@ -30,14 +30,6 @@ jobs:
           cp -r cypress/videos public/videos
           cp -r cypress/screenshots public/screenshots
 
-      - name: Deploy to GitHub Pages 🚀
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          user_name: ${{ vars.user_name }}
-          user_email: ${{ vars.user_email }}
-
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
@@ -46,6 +38,12 @@ jobs:
             output.html
             cypress/videos/*.mp4
           expire-in: 1d
+          
+      - name: Deploy GitHub Pages site
+        uses: actions/deploy-pages@v3.0.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifact_name: Report
 
   Send-Email:
     needs: Cypress-Test
