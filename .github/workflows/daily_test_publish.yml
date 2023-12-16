@@ -35,7 +35,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: Github Actions
+          publish_branch: master
           user_name: ${{ vars.user_name }}
           user_email: ${{ vars.user_email }}
 
