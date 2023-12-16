@@ -1,4 +1,6 @@
 const { defineConfig } = require("cypress");
+const allureWriter = require('@shelex/cypress-allure-plugin/writer');
+// import allureWriter from "@shelex/cypress-allure-plugin/writer";
 
 module.exports = defineConfig({
   projectId: "",
@@ -9,8 +11,12 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       const cucumber = require('cypress-cucumber-preprocessor').default
       on('file:preprocessor', cucumber());
+      allureWriter(on, config);
+      return config;
     },
-
+    env: {
+      allureReuseAfterSpec: true
+    },
 
     specPattern: 'cypress/e2e/features/**/*.{feature,cy.js}',
     excludeSpecPattern: "**/cypress/pages/*,cypress/integration/step-definition/*",

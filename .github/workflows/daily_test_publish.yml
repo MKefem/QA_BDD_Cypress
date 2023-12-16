@@ -16,19 +16,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run Test in Cypress and generate Cucumber HTML Report
         uses: cypress-io/github-action@v6
         with:
-          command: npm run TestWithReportGeneration
+          command: npm run run-smoke-get-mocha-report
           browser: chrome
+
+      - name: Copy test execution videos and images
+        run: |
+          mkdir public
+          cp -r cypress/videos public/videos
+          cp -r cypress/screenshots public/screenshots
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_directory: ./public
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
           name: Report
-          path: report.tar.gz
+          path: |
+            output.html
+            cypress/videos/*.mp4
           expire-in: 1d
 
   Send-Email:
@@ -55,7 +69,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: report.tar.gz
+          attachments: output.html, cypress/videos/weathershopper.feature.mp4
           content_type: text/plain
         env:
           CI: 1
