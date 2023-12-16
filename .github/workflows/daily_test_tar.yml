@@ -1,8 +1,9 @@
-name: D Test Report
+name: Daily full Test Report
 
 on:
-  pull_request:
+  push:
     branches: ["master"]
+
   schedule:
     - cron: "30 05 * * *"
 
@@ -20,16 +21,14 @@ jobs:
       - name: Run Test in Cypress and generate Cucumber HTML Report
         uses: cypress-io/github-action@v6
         with:
-          command: npm run run-smoke-get-mocha-report
+          command: npm run TestWithReportGeneration
           browser: chrome
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
           name: Report
-          path: |
-            output.html
-            cypress/videos/*.mp4
+          path: report.tar.gz
           expire-in: 1d
 
   Send-Email:
@@ -56,7 +55,7 @@ jobs:
           subject: "Cucumber HTML Report"
           to: ${{ env[matrix.email] }}
           body: "Please find the attached Cucumber HTML Report."
-          attachments: output.html, cypress/videos/weathershopper.feature.mp4
+          attachments: report.tar.gz
           content_type: text/plain
         env:
           CI: 1
