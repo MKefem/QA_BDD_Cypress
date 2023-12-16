@@ -37,7 +37,7 @@ jobs:
           path: |
             output.html
             cypress/videos/*.mp4
-          expire-in: 1d
+          retention-days: 1d
           
       - name: Deploy GitHub Pages site
         uses: actions/deploy-pages@v3.0.1
