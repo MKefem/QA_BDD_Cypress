@@ -3,13 +3,14 @@ name: Daily full Test Report
 on:
   push:
     branches: ["master"]
-
+  workflow_dispatch:
+  
   schedule:
     - cron: "30 05 * * *"
 
 env:
-  EMAIL_1: ${{ vars.EMAIL_1 }}
-  EMAIL_2: ${{ vars.EMAIL_2 }}
+  EMAIL_1: ${{ secrets.EMAIL_1 }}
+  EMAIL_2: ${{ secrets.EMAIL_2 }}
 
 jobs:
   Cypress-Test:
@@ -38,18 +39,49 @@ jobs:
             output.html
             cypress/videos/*.mp4
           retention-days: 1d
-          
-      - name: Deploy GitHub Pages site
-        uses: actions/deploy-pages@v3.0.1
-        with:
-          artifact_name: Report
+
+  Deploy-GitHub-Pages:
+    needs: Cypress-Test
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+
+    jobs:
+      deploy:
+        runs-on: ubuntu-latest
+        environment:
+          name: github-pages
+          url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - name: Setup Pages
+            uses: actions/configure-pages@v4
+          - name: Upload artifact
+            uses: actions/upload-pages-artifact@v2
+            with:
+              # Upload entire repository
+              path: |
+                output.html
+                cypress/videos/*.mp4
+          - name: Deploy to GitHub Pages
+            id: deployment
+            uses: actions/deploy-pages@v3
+ 
 
   Send-Email:
     needs: Cypress-Test
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        email: ["EMAIL_1", "EMAIL_2"]  # Use environment variables as email addresses
+        email: ["EMAIL_1", "EMAIL_2"]
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
