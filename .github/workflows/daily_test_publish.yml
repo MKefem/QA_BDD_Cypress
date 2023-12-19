@@ -1,12 +1,12 @@
 name: Daily full Test Report
 
 on:
-  push:
-    branches: ["master"]
+  #push:
+   # branches: ["master"]
   workflow_dispatch:
   
   schedule:
-    - cron: "30 05 * * *"
+    - cron: "30 05 * * 01"
 
 env:
   EMAIL_1: ${{ secrets.EMAIL_1 }}
