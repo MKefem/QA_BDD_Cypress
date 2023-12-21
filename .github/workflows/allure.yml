@@ -2,9 +2,16 @@ name: Allure Integration
 
 on: [push]
 
+env:
+  EMAIL_1: ${{ vars.EMAIL_1 }}
+  EMAIL_2: ${{ vars.EMAIL_2 }}
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        email: [ "EMAIL_1", "EMAIL_2" ]  # Use environment variables as email addresses
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,13 +34,6 @@ jobs:
         with:
           allure_results: allure-results
           gh_pages: allure
-      - name: Debug Repository Info
-        run: |
-          git branch -a
-          git remote -v
-          git log --oneline
-      - name: Debug GitHub Token
-        run: echo ${{ secrets.TOKEN }}
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
@@ -41,3 +41,25 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
           publish_branch: allure
           publish_dir: allure-history
+      - name: Send email with artifact
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          from: ${{ secrets.GMAIL_USERNAME }}
+          subject: "Cucumber HTML Report"
+          to: ${{ env[matrix.email] }}
+          body: |
+            Your webpage daily test report is ready.
+            
+            You can also view the report online: [View Report](https://mkefem.github.io/QA_BDD_Cypress/${{ github.run_number }}/)
+            
+            Thank you!
+          content_type: text/plain
+        env:
+          CI: 1
+          CYPRESS_CACHE_FOLDER: /home/runner/.cache/Cypress
+          npm_config_cache: /home/runner/.npm
+          TERM: xterm
