@@ -5,7 +5,7 @@ Please include a summary of PR (what functionality you have automated).
 ## Type of change
 
 - [ ] New feature (non-breaking change which adds functionality)
-- [ ] Update existing test case (fix or feature)
+- [ ] Update existing test case (fix or feature) 
 
 
 # Checklist:
