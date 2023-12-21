@@ -32,6 +32,8 @@ jobs:
           git branch -a
           git remote -v
           git log --oneline
+      - name: Debug GitHub Token
+        run: echo ${{ secrets.TOKEN }}
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
@@ -39,8 +41,3 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
           publish_branch: allure
           publish_dir: allure-history
-      - name: Debug Repository Info
-        run: |
-          git branch -a
-          git remote -v
-          git log --oneline
