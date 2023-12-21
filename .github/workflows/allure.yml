@@ -34,3 +34,8 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
           publish_branch: allure
           publish_dir: allure-history
+      - name: Debug Repository Info
+        run: |
+          git branch -a
+          git remote -v
+          git log --oneline
