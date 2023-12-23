@@ -36,6 +36,16 @@ Cypress.Commands.add('switchToIframe', (locator) => {
         .then(cy.wrap);
 });
 
+Cypress.Commands.add('clickx', { prevSubject: true }, (subject) => {
+    // Intercept all API calls
+    cy.intercept('**').as('requests');
+
+    // Click the element using force
+    cy.get(subject).click({ force: true });
+
+    // Wait for all intercepted requests to complete
+    cy.wait('@requests.all');
+});
 
 
 

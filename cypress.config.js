@@ -5,9 +5,10 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer');
 module.exports = defineConfig({
   projectId: "",
   CYPRESS_RECORD_KEY: '',
+  experimentalModifyObstructiveThirdPartyCode: true,
 
   e2e: {
-    baseUrl: "https://weathershopper.pythonanywhere.com/",
+    baseUrl: "https://gerpaas.com/",
     setupNodeEvents(on, config) {
       const cucumber = require('cypress-cucumber-preprocessor').default
       on('file:preprocessor', cucumber());
@@ -21,10 +22,12 @@ module.exports = defineConfig({
     specPattern: 'cypress/e2e/features/**/*.{feature,cy.js}',
     excludeSpecPattern: "**/cypress/pages/*,cypress/integration/step-definition/*",
     experimentalSessionAndOrigin: true,
+    viewportWidth: 1400,
+    viewportHeight: 660,
     failOnStatusCode: false,
     experimentalWebKitSupport: true,
-    defaultCommandTimeout: 10000,
-    pageLoadTimeout: 8000,
+    defaultCommandTimeout: 15000,
+    pageLoadTimeout: 30000,
     watchForFileChanges: false,
     chromeWebSecurity: false,
     reporter: 'cypress-mochawesome-reporter',
@@ -41,7 +44,7 @@ module.exports = defineConfig({
 
     "retries": {
 
-      "runMode": 1,
+      "runMode": 0,
 
       "openMode": 1
     },
