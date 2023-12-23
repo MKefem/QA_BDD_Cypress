@@ -6,7 +6,7 @@ Feature: Website Navigation
     And the user clicks on the "HOME" link in the navigation menu
     And the user should see the "https://gerpaas.com/" on the URL
     And the user should see the social media icons and links are correct on the header
-    #And the user should see slider texts are loaded correctly
+    And the user should see slider texts are loaded correctly
 
 
   Scenario: Check Footer section is loaded correctly
