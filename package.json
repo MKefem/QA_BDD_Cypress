@@ -64,6 +64,7 @@
     }
   },
   "dependencies": {
+    "ci": "^2.3.0",
     "multiple-cucumber-html-reporter": "^3.0.1"
   }
 }
