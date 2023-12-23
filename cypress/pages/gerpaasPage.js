@@ -22,9 +22,7 @@ class gerpaasPage {
 
     navigateTo(website){
         this.invokeReload(() => {
-            cy.intercept('**').as('requests')
             cy.visit('/')
-            cy.get('@requests.all')
             cy.get('a.cookies-accept-btn').click();
         });
     }
@@ -72,7 +70,6 @@ class gerpaasPage {
         cy.get('.text-center.color-scheme-dark a').should('have.length', 4);
         cy.get('.text-center.color-scheme-dark a').each($icons =>{
             const href = cy.wrap($icons).invoke('attr', 'href').should('be.oneOf', this.data.SMlinks)
-            console.log('href burada'+this.data.SMlinks)
             const type = cy.wrap($icons).invoke('attr', 'aria-label').should('be.oneOf', this.data.SMtypes)
 
         })
@@ -87,20 +84,64 @@ class gerpaasPage {
         cy.get('img[srcset*=\'LOGO\']').should('exist');
     }
 
-
-
-
-        // Assert the presence of the company name
-        cy.get('.elementor-widget-heading:contains("Company")').should('exist');
-
+    verifyMailLink(){
         // Assert the presence of the "Mail" link
         cy.get('a[href="mailto:info@gerpaas.com"]').should('exist');
+    }
 
+    verifyPhoneLink(){
         // Assert the presence of the "Phone" link
         cy.get('a[href="tel:+902164897005"]').should('exist');
+    }
 
-        // Assert the presence of the "Latest News" section
-        cy.get('.elementor-widget-heading:contains("Latest News")').should('exist');
+    verifySubscribe(){
+        cy.get('input[value=\'SUBSCRIBE\']').should('exist')
+    }
+    verifyFooterSMicons(){
+        cy.get('div[class*=\'icons-design-bordered\'] a').should('have.length', 4);
+        cy.get('div[class*=\'icons-design-bordered\'] a').each($icons =>{
+            const href = cy.wrap($icons).invoke('attr', 'href').should('be.oneOf', this.data.SMlinks)
+            const type = cy.wrap($icons).invoke('attr', 'aria-label').should('be.oneOf', this.data.SMtypes)
+        })
+    };
+
+    verifyimages(locator){
+        cy.get(locator).should('be.visible').should('have.attr', 'src').then((src) => {
+            // Create an image object in the browser to check the naturalWidth
+            cy.request(src).then((response) => {
+                // Check that the response has a successful status code (e.g., 200)
+                expect(response.status).to.eq(200);
+
+                // Continue with your assertions based on the response
+                const contentType = response.headers['content-type'];
+                expect(contentType).to.include('image/jpeg');
+
+                // Get the width and height of the image using image-size library
+                const dimensions = sizeOf(Buffer.from(response.body, 'base64'));
+                const imageWidth = dimensions.width;
+
+                expect(imageWidth).to.be.greaterThan(0);
+            });
+
+        });
+    }
+
+    verifyNewsImages(){
+        cy.get('[class="wd-post-img"] img').each($img =>{
+            this.verifyimages($img)
+        })
+    }
+
+    verifyWhatWeAreDoingImages(){
+        cy.get('[class="category-image-wrapp"] a img').each($img =>{
+            this.verifyimages($img)
+        })
+    }
+
+    verifyAboutUsBttn(){
+        cy.get('span[class=\'cretive-button-text\']').should('be.visible')
+        cy.get('[class$=\'eael-creative-button--default\']').invoke('attr','href').should('have.text','https://gerpaas.com/about-us/')
+    }
 
 
 }

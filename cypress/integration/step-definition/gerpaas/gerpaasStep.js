@@ -48,7 +48,49 @@ When(/^the user should see slider texts are loaded correctly$/, function () {
 When(/^the user should see the social media icons and links are correct on the header$/, function () {
     gerpaasPage.verifyHeaderSMicons();
 });
-Then(/^the contact section should exist$/, function () {
+Then(/^the footer section should exist$/, function () {
     gerpaasPage.verifyContact();
+
+});
+Then(/^the company logo should be displayed$/, function () {
+    gerpaasPage.verifyBottomLogo();
+
+});
+Then(/^there should be a "([^"]*)" link with the email address "([^"]*)"$/, function () {
+    gerpaasPage.verifyMailLink()
+
+});
+Then(/^there should be a "([^"]*)" link with the phone number "\+902164897005"$/, function () {
+    gerpaasPage.verifyPhoneLink();
+
+});
+Then(/^the "([^"]*)" button should exist$/, function (button) {
+    switch (button) {
+        case "subscribe":
+            gerpaasPage.verifySubscribe();
+            break;
+        case "About Us":
+            gerpaasPage.verifyAboutUsBttn();
+            break
+        default:
+            throw new Error(`Unsupported button name as ${button}`);
+    }
+
+});
+Then(/^the footer social media links should exist$/, function () {
+    gerpaasPage.verifyFooterSMicons();
+
+});
+Then(/^the "([^"]*)" images should exist$/, function (section) {
+    switch (section){
+        case "News":
+            gerpaasPage.verifyNewsImages();
+            break;
+        case "What We are Doing":
+            gerpaasPage.verifyWhatWeAreDoingImages();
+            break;
+        default:
+            throw new Error('Section is not defined yet')
+    }
 
 });

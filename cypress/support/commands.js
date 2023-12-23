@@ -44,7 +44,7 @@ Cypress.Commands.add('clickx', { prevSubject: true }, (subject) => {
     cy.get(subject).click({ force: true });
 
     // Wait for all intercepted requests to complete
-    cy.wait('@requests.all');
+    cy.wait('@requests');
 });
 
 

@@ -11,8 +11,12 @@ Feature: Website Navigation
 
   Scenario: Check Footer section is loaded correctly
     Given the user is on the "gerpaas.com" website homepage
-    Then the contact section should exist
-    And the company name should be displayed
+    Then the footer section should exist
+    And the company logo should be displayed
     And there should be a "Mail" link with the email address "info@gerpaas.com"
     And there should be a "Phone" link with the phone number "+902164897005"
-    And the "Latest News" section should exist
+    And the "subscribe" button should exist
+    And the footer social media links should exist
+    And the "News" images should exist
+    And the "What We are Doing" images should exist
+    And the "About Us" button should exist
