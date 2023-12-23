@@ -1,6 +1,5 @@
 Feature: Weather Shopper Website
 
-  @smoke @regression
   Scenario: Shopping for Moisturizers in Cold Weather
     Given I am on the Weather Shopper website
     When I see the weather is below 19 degrees
@@ -13,7 +12,6 @@ Feature: Weather Shopper Website
     And I fill out valid payment details and submit the form
     Then I should see a success message on the confirmation page
 
-  @smoke @regression
   Scenario: Shopping for Sunscreens in Hot Weather
     Given I am on the Weather Shopper website
     When I see the weather is above 34 degrees

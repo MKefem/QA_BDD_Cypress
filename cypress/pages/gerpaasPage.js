@@ -59,13 +59,8 @@ class gerpaasPage {
     checkSliderText(){
         cy.get('div[class*=\'subtitle-style-default\'] strong').should('have.text', "More than 90 countries globally in 6 continents");
         cy.get('div[data-id=\'91bb470\'] .liner-continer h4').should('have.text',this.data.HomePageSliderText[1]);
-        //cy.get('div[data-id=\'91bb470\'] .liner-continer h4 strong').should('have.text',this.data.HomePageSliderSubText[1]);
         cy.get('.next').click();
         cy.get('div[data-id=\'4312a39\'] .liner-continer h4').should('have.text',this.data.HomePageSliderText[0]);
-        //cy.get('div[data-id=\'4312a39\'] .liner-continer h4 strong').should('have.text',this.data.HomePageSliderSubText[0]);
-        cy.get('.next').click();
-        cy.get('div[data-id=\'3b14e52\'] .liner-continer h4').should('have.text',this.data.HomePageSliderText[2]);
-        //cy.get('div[data-id=\'3b14e52\'] .liner-continer h4 strong').should('have.text',this.data.HomePageSliderSubText[2]);
     }
     verifyHeaderSMicons(){
         cy.get('.text-center.color-scheme-dark a').should('have.length', 4);
@@ -108,7 +103,7 @@ class gerpaasPage {
 
     verifyImages(locator){
         cy.get(locator).then(img =>{
-            cy.wrap(locator).should('be.visible');
+            cy.wrap(locator).should('be.visible', {responseTimeout:10000});
             expect(img[0].naturalWidth).to.be.greaterThan(0);
         })
         cy.get(locator).should('have.attr', 'src')

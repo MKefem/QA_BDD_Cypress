@@ -1,5 +1,6 @@
 Feature: Website Navigation
 
+  @smoke
   Scenario: Verify Home Menu Navigation Item and Components
     Given the user is on the "gerpaas.com" website homepage
     When the user clicks on the "PRODUCTS" link in the navigation menu
@@ -8,7 +9,7 @@ Feature: Website Navigation
     And the user should see the social media icons and links are correct on the header
     And the user should see slider texts are loaded correctly
 
-
+  @smoke
   Scenario: Check Footer section is loaded correctly
     Given the user is on the "gerpaas.com" website homepage
     Then the footer section should exist
@@ -18,6 +19,7 @@ Feature: Website Navigation
     And the "subscribe" button should exist
     And the footer social media links should exist
 
+  @smoke
   Scenario: Check Body section is loaded correctly
     Given the user is on the "gerpaas.com" website homepage
     And the "News" images should exist

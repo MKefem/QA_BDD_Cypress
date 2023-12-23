@@ -19,7 +19,7 @@
     "generate-single-html-report": "npx marge cypress/report/output.json --reportDir ./ --inline",
     "delete-existingMochaJsonReports": "rm -rf cypress/report/mochawesome-report/.json/*.json",
     "run-smoke-get-mocha-report": "npm run delete-mocha-reports; npm run run-smoke-with-mocha; npm run merge-mocha-reports; npm run generate-single-html-report; npm run delete-mocha-reports ",
-    "run-smoke-with-allure": "npx cypress run -e TAGS='@smoke' --e2e --browser chrome --headless --spec 'cypress/e2e/features/**/*.feature' --env allure=true",
+    "run-smoke-with-allure": "npx cypress run -e TAGS='@smoke' --e2e --browser electron --headless --spec 'cypress/e2e/features/**/*.feature' --env allure=true",
     "generate-allure-report": "allure generate allure-results --clean -o allure-report",
     "open-allure": "allure open",
     "delete-allure-reports": "rm -rf allure-report/",
