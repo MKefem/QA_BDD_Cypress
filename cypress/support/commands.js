@@ -36,15 +36,23 @@ Cypress.Commands.add('switchToIframe', (locator) => {
         .then(cy.wrap);
 });
 
-Cypress.Commands.add('clickx', { prevSubject: true }, (subject) => {
+Cypress.Commands.add('clickx', { prevSubject: 'element' }, (element) => {
     // Intercept all API calls
     cy.intercept('**').as('requests');
 
     // Click the element using force
-    cy.get(subject).click({ force: true });
+    cy.get(element).click({ force: true });
 
     // Wait for all intercepted requests to complete
     cy.wait('@requests');
+});
+
+Cypress.Commands.add('waitForImageToBeVisible', { prevSubject: 'element' }, (element) => {
+    // Scroll the parent element into view to avoid clipping issues
+    cy.wrap(element).scrollIntoView();
+
+    // Check for the visibility of the element
+    cy.get(element).should('be.visible');
 });
 
 

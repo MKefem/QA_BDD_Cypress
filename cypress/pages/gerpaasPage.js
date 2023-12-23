@@ -1,3 +1,4 @@
+
 class gerpaasPage {
 
     constructor(locators, data) {
@@ -8,6 +9,7 @@ class gerpaasPage {
     weblocators = {
     }
 
+
     invokeReload (callBack) {
         cy.window().then((win) => {
             win.document.addEventListener('click', () => {
@@ -15,14 +17,13 @@ class gerpaasPage {
                     win.document.location.reload();
                 }, 5000);
             });
-
             callBack();
         });
     };
 
     navigateTo(website){
         this.invokeReload(() => {
-            cy.visit('/')
+            cy.visit('/',{headers: {"Accept-Encoding": "gzip, deflate "}})
             cy.get('a.cookies-accept-btn').click();
         });
     }
@@ -30,12 +31,12 @@ class gerpaasPage {
         switch (pageName) {
             case 'HOME':
                 this.invokeReload(() => {
-                    cy.contains('HOME').click({force:true});
+                    cy.contains('HOME').click({force: true});
                 });
                 break;
             case 'PRODUCTS':
                 this.invokeReload(() => {
-                    cy.contains('PRODUCTS').click({force:true});
+                    cy.contains('PRODUCTS').click({force: true});
                 });
                 break;
             case 'Cable Trays':
@@ -69,8 +70,8 @@ class gerpaasPage {
     verifyHeaderSMicons(){
         cy.get('.text-center.color-scheme-dark a').should('have.length', 4);
         cy.get('.text-center.color-scheme-dark a').each($icons =>{
-            const href = cy.wrap($icons).invoke('attr', 'href').should('be.oneOf', this.data.SMlinks)
-            const type = cy.wrap($icons).invoke('attr', 'aria-label').should('be.oneOf', this.data.SMtypes)
+            cy.wrap($icons).invoke('attr', 'href').should('be.oneOf', this.data.SMlinks)
+            cy.wrap($icons).invoke('attr', 'aria-label').should('be.oneOf', this.data.SMtypes)
 
         })
     };
@@ -100,13 +101,18 @@ class gerpaasPage {
     verifyFooterSMicons(){
         cy.get('div[class*=\'icons-design-bordered\'] a').should('have.length', 4);
         cy.get('div[class*=\'icons-design-bordered\'] a').each($icons =>{
-            const href = cy.wrap($icons).invoke('attr', 'href').should('be.oneOf', this.data.SMlinks)
-            const type = cy.wrap($icons).invoke('attr', 'aria-label').should('be.oneOf', this.data.SMtypes)
+            cy.wrap($icons).invoke('attr', 'href').should('be.oneOf', this.data.SMlinks)
+            cy.wrap($icons).invoke('attr', 'aria-label').should('be.oneOf', this.data.SMtypes)
         })
     };
 
-    verifyimages(locator){
-        cy.get(locator).should('be.visible').should('have.attr', 'src').then((src) => {
+    verifyImages(locator){
+        cy.get(locator).then(img =>{
+            cy.wrap(locator).should('be.visible');
+            expect(img[0].naturalWidth).to.be.greaterThan(0);
+        })
+        cy.get(locator).should('have.attr', 'src')
+        /* cy.get(locator).invoke('attr', 'src').then(src => {
             // Create an image object in the browser to check the naturalWidth
             cy.request(src).then((response) => {
                 // Check that the response has a successful status code (e.g., 200)
@@ -114,33 +120,34 @@ class gerpaasPage {
 
                 // Continue with your assertions based on the response
                 const contentType = response.headers['content-type'];
-                expect(contentType).to.include('image/jpeg');
-
-                // Get the width and height of the image using image-size library
-                const dimensions = sizeOf(Buffer.from(response.body, 'base64'));
-                const imageWidth = dimensions.width;
-
-                expect(imageWidth).to.be.greaterThan(0);
+                expect(contentType).to.include('image');
             });
 
-        });
+        });*/
     }
 
     verifyNewsImages(){
+        let count=0;
         cy.get('[class="wd-post-img"] img').each($img =>{
-            this.verifyimages($img)
+            cy.wrap($img).waitForImageToBeVisible($img);
+            this.verifyImages($img)
+            count ++
+            if(count === 4 || count === 8){
+                cy.get('div[class=\'owl-nav\'] div[class^=\'owl-next\']').click({force: true});
+            }
         })
     }
 
     verifyWhatWeAreDoingImages(){
         cy.get('[class="category-image-wrapp"] a img').each($img =>{
-            this.verifyimages($img)
+            cy.wrap($img).waitForImageToBeVisible($img);
+            this.verifyImages($img)
         })
     }
 
     verifyAboutUsBttn(){
         cy.get('span[class=\'cretive-button-text\']').should('be.visible')
-        cy.get('[class$=\'eael-creative-button--default\']').invoke('attr','href').should('have.text','https://gerpaas.com/about-us/')
+        cy.get('[class$=\'eael-creative-button--default\']').invoke('attr','href').should('contain','https://gerpaas.com/about-us/')
     }
 
 
