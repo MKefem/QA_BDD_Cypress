@@ -1,7 +1,12 @@
 name: Allure Integration
 
-on: [push]
+on:
+  #push:
+  # branches: ["master"]
+  workflow_dispatch:
 
+  schedule:
+    - cron: "30 05 * * 01"
 env:
   EMAIL_1: ${{ vars.EMAIL_1 }}
   EMAIL_2: ${{ vars.EMAIL_2 }}
