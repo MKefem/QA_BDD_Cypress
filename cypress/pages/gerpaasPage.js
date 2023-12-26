@@ -103,7 +103,7 @@ class gerpaasPage {
 
     verifyImages(locator){
         cy.get(locator).then(img =>{
-            cy.wrap(locator).should('be.visible', {responseTimeout:10000});
+            cy.wrap(locator).should('be.visible');
             expect(img[0].naturalWidth).to.be.greaterThan(0);
         })
         cy.get(locator).should('have.attr', 'src')
@@ -123,12 +123,14 @@ class gerpaasPage {
 
     verifyNewsImages(){
         let count=0;
+        let stop = false;
         cy.get('[class="wd-post-img"] img').each($img =>{
             cy.wrap($img).waitForImageToBeVisible($img);
             this.verifyImages($img)
             count ++
-            if(count === 4 || count === 8){
-                cy.get('div[class=\'owl-nav\'] div[class^=\'owl-next\']').click({force: true});
+            if(count === 4 ){
+                stop=true;
+
             }
         })
     }
