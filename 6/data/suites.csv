@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Thu Dec 21 14:42:53 GMT 2023","Thu Dec 21 14:43:03 GMT 2023","9622","","Weather Shopper Website","","","","Shopping for Moisturizers in Cold Weather",""
-"passed","Thu Dec 21 14:43:12 GMT 2023","Thu Dec 21 14:43:12 GMT 2023","446","","Weather Shopper Website","","","","No Shopping Action Required in Moderate Weather",""
-"passed","Thu Dec 21 14:43:03 GMT 2023","Thu Dec 21 14:43:12 GMT 2023","8960","","Weather Shopper Website","","","","Shopping for Sunscreens in Hot Weather",""
