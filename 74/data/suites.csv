@@ -1,7 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","73873","Verify Home Menu Navigation Item and Components","","Mon Feb 17 05:49:33 GMT 2025","failed","Mon Feb 17 05:50:46 GMT 2025","","Website Navigation","",""
-"","79829","Shopping for Sunscreens in Hot Weather","","Mon Feb 17 06:14:26 GMT 2025","failed","Mon Feb 17 06:15:46 GMT 2025","","Weather Shopper Website","",""
-"","7416","Check Body section is loaded correctly","","Mon Feb 17 05:57:56 GMT 2025","failed","Mon Feb 17 05:58:04 GMT 2025","","Website Navigation","",""
-"","80921","No Shopping Action Required in Moderate Weather","","Mon Feb 17 06:22:17 GMT 2025","failed","Mon Feb 17 06:23:38 GMT 2025","","Weather Shopper Website","",""
-"","79042","Shopping for Moisturizers in Cold Weather","","Mon Feb 17 06:06:24 GMT 2025","failed","Mon Feb 17 06:07:43 GMT 2025","","Weather Shopper Website","",""
-"","65621","Check Footer section is loaded correctly","","Mon Feb 17 05:56:15 GMT 2025","failed","Mon Feb 17 05:57:21 GMT 2025","","Website Navigation","",""
